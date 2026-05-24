@@ -6,11 +6,11 @@ public:
         int best =0;
 
         for (int jump=1; jump<=d; jump++){
-            if (i+jump<arr.size() && arr[i+jump]>=arr[i]) break;
+            if (i+jump>=arr.size() || arr[i+jump]>=arr[i]) break;
             best = max(best, solve(i+jump, d, dp, arr)); // max(dp[i+jump],dp[i])+1;
         }
         for (int jump=1; jump<=d; jump++){
-            if (i-jump>=0 && arr[i-jump]>=arr[i] )break;
+            if (i-jump<0 || arr[i-jump]>=arr[i] )break;
             best = max(best, solve(i-jump, d, dp, arr));
         }
 
@@ -20,7 +20,7 @@ public:
 
     int maxJumps(vector<int>& arr, int d) {
         int n = arr.size();
-        vector<int> dp(n);
+        vector<int> dp(n,-1);
         int ans=0;
 
         for (int i=0; i<n ;i++){
